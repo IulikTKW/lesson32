@@ -1,4 +1,9 @@
 
-.listItem {
-    text-decoration: line-through;
+.list-item {
+    display: flex;
+    gap: 24px;
+}
+
+.list-item-done {
+    text-decoration: line-through;        
 }

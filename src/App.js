@@ -29,6 +29,21 @@ function App() {
     setNewToDo('')
   }
 
+  const handleDelete = (toDoTitle) => { 
+    setToDoList((list) => {
+      return list.filter(item => item.title !== toDoTitle)
+    })
+  }
+
+  const handleToggleToDo = (toDoTitle) => {
+    setToDoList((list) => {
+      return list.map((item) => {
+        return { ...item, done: item.title === toDoTitle ? !item.done : item.done}
+      })
+    })
+    
+  }
+
   return (
     <div>
       <ToDoForm
@@ -39,14 +54,20 @@ function App() {
         btnAction={handleChangeListToDo}
       />
       <ul>
-        {toDoList.map((listItem) => {
+        {toDoList.map(({title, done}) => {
           return <ListItem
-            key={listItem.title}
-            title={listItem.title}
-            done={listItem.done}
+            key={title}
+            title={title}
+            done={done}
+            itemAction={() => {
+              handleToggleToDo(title)
+            }}
             editAction={() => {
-              setEditToDo(listItem.title)
-              setNewToDo(listItem.title)
+              setEditToDo(title)
+              setNewToDo(title)
+            }}
+            deleteAction={() =>{
+              handleDelete(title)
             }}
           />
         })}
@@ -66,3 +87,7 @@ function App() {
 }
 
 export default App;
+
+
+// adaugati 2 liste una cu done si una cu undone 
+// adaugati cateva tipuri pentru button
