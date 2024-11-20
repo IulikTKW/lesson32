@@ -1,3 +1,7 @@
+:root {
+  --primary-color: rgb(3, 132, 184);
+}
+
 body {
   margin: 0;
 }

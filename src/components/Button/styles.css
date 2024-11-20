@@ -1,0 +1,23 @@
+
+
+.button-primary {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    background-color: rgb(3, 132, 184);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 8px 16px;
+}
+
+.button-secondary {
+    display: flex;
+    gap: 8px;
+    background-color: white;
+    border: 1px solid rgb(3, 132, 184);
+    outline: none;
+    color: var(--primary-color);
+    justify-content: center;
+    padding: 8px 16px;
+}

@@ -8,13 +8,15 @@ const ToDoForm = ({
     onChange,
     placeholder = 'Add to do',
     btnTitle,
-    btnAction
+    btnAction,
+    btnType,
+    clear,
 }) => {
     return(
         <div className="formWrapper">
             <p>{title}</p>
-            <Input value={value} onChange={onChange} placeholder={placeholder} />
-            <Button onClick={btnAction} title={btnTitle} />
+            <Input clear={clear} value={value} onChange={onChange} placeholder={placeholder} />
+            <Button onClick={btnAction} title={btnTitle} type={btnType} />
         </div>
     )
 }

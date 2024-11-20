@@ -40,9 +40,46 @@ function App() {
       return list.map((item) => {
         return { ...item, done: item.title === toDoTitle ? !item.done : item.done}
       })
-    })
-    
+    })    
   }
+
+  const doneToDoList = toDoList.filter((item) => item.done)
+  .map(({title, done}) => {
+    return <ListItem
+      key={title}
+      title={title}
+      done={done}
+      itemAction={() => {
+        handleToggleToDo(title)
+      }}
+      editAction={() => {
+        setEditToDo(title)
+        setNewToDo(title)
+      }}
+      deleteAction={() =>{
+        handleDelete(title)
+      }}
+    />
+  })
+
+  const unDoneToDoList = toDoList.filter((item) => !item.done)
+  .map(({title, done}) => {
+    return <ListItem
+      key={title}
+      title={title}
+      done={done}
+      itemAction={() => {
+        handleToggleToDo(title)
+      }}
+      editAction={() => {
+        setEditToDo(title)
+        setNewToDo(title)
+      }}
+      deleteAction={() =>{
+        handleDelete(title)
+      }}
+    />
+  })
 
   return (
     <div>
@@ -51,26 +88,17 @@ function App() {
         value={toDo}
         onChange={setToDo}
         btnTitle="Add to Do"
+        btnType="primary"
         btnAction={handleChangeListToDo}
+        clear={() => setToDo('')}
       />
+      <p>Done:</p>
       <ul>
-        {toDoList.map(({title, done}) => {
-          return <ListItem
-            key={title}
-            title={title}
-            done={done}
-            itemAction={() => {
-              handleToggleToDo(title)
-            }}
-            editAction={() => {
-              setEditToDo(title)
-              setNewToDo(title)
-            }}
-            deleteAction={() =>{
-              handleDelete(title)
-            }}
-          />
-        })}
+        {doneToDoList}      
+      </ul>
+      <p>Undone:</p>
+      <ul>
+        {unDoneToDoList}      
       </ul>
       <Modal isOpen={editToDo} closeModal={setEditToDo}>
         <ToDoForm
@@ -79,9 +107,12 @@ function App() {
           onChange={setNewToDo}
           btnTitle="Edit to Do"
           btnAction={handleEditToDo}
+          btnType="secondary"
           placeholder="New title"
+          clear={() => setNewToDo('')}
         />
       </Modal>
+
     </div>
   );
 }
